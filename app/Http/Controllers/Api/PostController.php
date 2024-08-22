@@ -1,22 +1,20 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     //
-    public function index(): JsonResponse
+    public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(10);
 
         return response()->json([
             'success' => true,
-            'data' => $posts,
+            'results' => $posts,
         ]);
     }
 }
